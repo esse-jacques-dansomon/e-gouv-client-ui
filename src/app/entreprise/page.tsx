@@ -1,18 +1,17 @@
 'use client'
 import CategoryCard from "@/components/CategoryCard";
 import InfoCard from "@/components/InfoCard";
-import { categories, infoLinks, servicesLinks } from "@/constantes/data";
+import { categories, entreprisesCategories, infoLinks, servicesLinks } from "@/constantes/data";
+import { useAppContext } from "@/app/providers";
 
 import React from 'react'
-import { useAppContext } from "./providers";
 
 const Home = () => {
   const { activeTab, setActiveTab } = useAppContext();
-  setActiveTab("espace citoyen")
- 
+  setActiveTab("espace entreprise")
   return (
       <>
-      <div className={`min-h-[60vh] w-full bg-primary `} ></div>
+      <div className="min-h-[60vh] w-full bg-senRed"></div>
           <div className=" -mt-[40vh] left-0 right-0 bottom-0 z-0 app-container  max-sm:px-5">
             <div className="">
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white">Votre plateforme de services <br/>gouvernementaux</h1>
@@ -28,7 +27,7 @@ const Home = () => {
                 </div>
               </div>
               <div className="grid ms:grid-col-1  md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 mt-20">
-              {categories.map((category) => (
+              {entreprisesCategories.map((category) => (
                   <CategoryCard key={category.id} category={category} />
                 ))}
 
