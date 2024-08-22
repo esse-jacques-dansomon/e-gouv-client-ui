@@ -8,7 +8,7 @@ import React from 'react'
 
 const Home = () => {
   const { activeTab, setActiveTab } = useAppContext();
-  setActiveTab("espace entreprise")
+
   return (
       <>
       <div className="min-h-[60vh] w-full bg-senRed"></div>

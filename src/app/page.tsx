@@ -8,7 +8,7 @@ import { useAppContext } from "./providers";
 
 const Home = () => {
   const { activeTab, setActiveTab } = useAppContext();
-  setActiveTab("espace citoyen")
+
  
   return (
       <>
