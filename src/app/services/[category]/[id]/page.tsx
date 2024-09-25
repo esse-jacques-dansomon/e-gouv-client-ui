@@ -180,9 +180,9 @@ const ServiceDetails = () => {
                         </p>
                         {/*site web */}
                         <p className='text-black text-[14px] text-start'>
-                            <a href="https://www.arcep.fr/" target="_blank" rel="noopener noreferrer">
+                            <Link href="https://www.arcep.fr/" target="_blank" rel="noopener noreferrer">
                                 https://www.arcep.fr/
-                            </a>
+                            </Link>
                         </p>
                         {/* Partager */}
                         <div className="flex items-start flex-col">

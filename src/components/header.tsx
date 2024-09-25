@@ -1,10 +1,11 @@
 'use client'
-import React, { useState } from 'react'
+import React, { act, useState } from 'react'
 
 import Image from 'next/image'
 import Link from 'next/link';
 import { useAppContext } from '@/app/providers';
 import { useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation'
 
 const Header = () => {
 
@@ -12,6 +13,7 @@ const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState('FR');
   const router = useRouter();
+
   const { activeTab, setActiveTab } = useAppContext();
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -32,13 +34,19 @@ const Header = () => {
     setIsMenuOpen(!isMenuOpen);
   }
 
+
+  const currentPath = usePathname()
+  const isEspaceEntreprise = activeTab === "espace entreprise" // Détecte si l'utilisateur est sur la page Espace Entreprise
+
+
+
   return (
    <header className=" bg-white  fixed top-0 left-0 right-0 z-30 ">
     <div className="bg-white text-white ">
       <div className="app-container flex items-center justify-between">
         <div className="flex items-center h-8 justify-between text-sm">
-          <Link href="/" className={`hover:underline px-4 text-center h-8  flex items-center justify-center ${activeTab === "espace citoyen" ?  'bg-primary' :'bg-white text-black ' }`}>Espace Citoyen</Link>
-          <Link href="/entreprise" className={`hover:underline px-4 text-center h-8  flex items-center justify-center ${activeTab === "espace entreprise" ? 'bg-senRed' : 'bg-white text-black ' }`}>Espace Entreprise</Link>
+          <Link href="/" className={`hover:underline px-4 text-center h-8  flex items-center justify-center ${ !isEspaceEntreprise?  'bg-primary' :'bg-white text-black ' }`}>Espace Citoyen</Link>
+          <Link href="/entreprise" className={`hover:underline px-4 text-center h-8  flex items-center justify-center ${isEspaceEntreprise  ? 'bg-senRed' : 'bg-white text-black ' }`}>Espace Entreprise</Link>
         </div>
         <div className="space-x-2  sm:flex text-sm">
           <form className="max-w-sm mx-auto">
@@ -51,7 +59,7 @@ const Header = () => {
         </div>                      
       </div>
     </div>
-    <div className={` ${activeTab === "espace citoyen" ? 'bg-primary' : 'bg-senRed'} `}>
+    <div className={` ${isEspaceEntreprise ? 'bg-senRed' : 'bg-primary'} `}>
       <div className="app-container flex justify-between items-center py-3 border-b-2 border-white">
       <div className="flex items-center justify-center">
             <div onClick={toggleMenu} id="menu-btn" className="text-gray-800 font-bold flex space-x-2 ">

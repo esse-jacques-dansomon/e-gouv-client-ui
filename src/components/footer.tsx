@@ -1,6 +1,7 @@
 'use client'
 import React, { useState } from 'react'
 import Image from 'next/image'
+import Link from 'next/link';
 
 const Footer = () => {
     // navigation
@@ -42,9 +43,9 @@ const Footer = () => {
                <Image src="https://img.icons8.com/ios/50/000000/chevron-right.png" alt="Chevron" width="16" height="16" className="mx-2 md:hidden " />
            </div>
            <div className={`flex flex-col justify-start items-start  footer-links md:flex ${openNavigation ? '' : 'hidden'}`}>
-               <a href="#" className="hover:underline">Accueil</a>
-               <a href="#" className="hover:underline">Services</a>
-               <a href="#" className="hover:underline">Contact</a>
+               <Link href="#" className="hover:underline">Accueil</Link>
+               <Link href="#" className="hover:underline">Services</Link>
+               <Link href="#" className="hover:underline">Contact</Link>
            </div>
 
        </div>
@@ -55,9 +56,9 @@ const Footer = () => {
                
            </div>
            <div className={`flex flex-col justify-start items-start  footer-links md:flex ${openInformations ? '' : 'hidden'}`}>
-               <a href="#" className="hover:underline">A propos</a>
-               <a href="#" className="hover:underline">FAQ</a>
-               <a href="#" className="hover:underline">Annuaire de l administration</a>
+               <Link href="#" className="hover:underline">A propos</Link>
+               <Link href="#" className="hover:underline">FAQ</Link>
+               <Link href="#" className="hover:underline">Annuaire de l administration</Link>
            </div>
        </div>
        <div className="flex flex-1 flex-col justify-start items-start space-x-2">
@@ -66,9 +67,9 @@ const Footer = () => {
                <Image src="https://img.icons8.com/ios/50/000000/chevron-right.png" alt="Chevron" width="16" height="16" className="mx-2 md:hidden" />
            </div>
            <div className={`flex flex-col justify-start items-start  footer-links md:flex ${openLiensRapides ? '' : 'hidden'}`}>
-               <a href="#" className="hover:underline">Mentions légales</a>
-               <a href="#" className="hover:underline">Politique de confidentialité</a>
-               <a href="#" className="hover:underline">Conditions d utilisation</a>
+               <Link href="#" className="hover:underline">Mentions légales</Link>
+               <Link href="#" className="hover:underline">Politique de confidentialité</Link>
+               <Link href="#" className="hover:underline">Conditions d utilisation</Link>
            </div>
        </div>
    </div>
