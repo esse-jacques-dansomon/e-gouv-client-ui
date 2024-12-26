@@ -45,4 +45,17 @@
 }
 
 
+/* Ajoutez ceci dans styles/globals.css ou un fichier CSS global */
+
+.input-field {
+  @apply border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-blue-600;
+}
+
+.btn-primary {
+  @apply bg-blue-600 text-white font-semibold px-4 py-2 rounded-lg hover:bg-blue-700;
+}
+
+.btn-secondary {
+  @apply bg-gray-200 text-gray-700 font-semibold px-4 py-2 rounded-lg hover:bg-gray-300;
+}
 
