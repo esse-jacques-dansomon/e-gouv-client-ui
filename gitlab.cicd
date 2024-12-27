@@ -1,0 +1,55 @@
+stages:
+  - build
+  - deploy
+
+variables:
+  IMAGE_TAG:  $CI_REGISTRY/agence-cauris/afrofame/espace-client
+  TAG_LATEST: $CI_REGISTRY/agence-cauris/afrofame/espace-client:latest
+  TAG_COMMIT: $CI_REGISTRY/agence-cauris/afrofame/espace-client:$CI_COMMIT_SHORT_SHA
+  NODE_ENV: production
+
+# Utiliser une image Docker pour exécuter les commandes Docker
+image: docker:20.10.16
+
+services:
+  - docker:20.10.16-dind
+
+before_script:
+  # Se connecter au registre GitLab avec les identifiants
+  - echo "$CI_REGISTRY_PASSWORD" | docker login $CI_REGISTRY -u $CI_REGISTRY_USER --password-stdin
+
+# Étape de construction de l'image Docker
+build:
+  stage: build
+  script:
+    - echo "Building Docker image for Next.js project..."
+    - docker build  -t $CI_REGISTRY/agence-cauris/afrofame/espace-client:latest  --build-arg NEXT_PUBLIC_ENV_VARIABLE=$NEXT_PUBLIC_ENV_VARIABLE .
+    - docker push $CI_REGISTRY/agence-cauris/afrofame/espace-client:latest
+  after_script:
+    - docker images
+    - ls -al
+  only:
+    - main
+
+
+# Étape de déploiement sur le serveur distant
+deploy:
+  stage: deploy
+  before_script:
+    - mkdir -p ~/.ssh
+    - echo "$DEPLOY_SSH_KEY" | tr -d '\r' > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+  script:
+    - echo "Déploiement de l'application Next.js sur le serveur..."
+    - ssh -o StrictHostKeyChecking=no root@185.98.137.165 "
+        echo "$CI_REGISTRY_PASSWORD" | docker login $CI_REGISTRY -u $CI_REGISTRY_USER --password-stdin &&
+        docker pull $CI_REGISTRY/agence-cauris/afrofame/espace-client:latest &&
+        cd /root/afrofame &&
+        docker compose up -d --build &&
+        docker ps
+      "
+  only:
+    - main
+
+after_script:
+  - docker logout
